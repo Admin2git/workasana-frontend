@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import useFetch from "../useFetch";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -9,23 +9,37 @@ const UseTaskContext = () => useContext(taskContext);
 export default UseTaskContext;
 
 export function TaskManageProvider({ children }) {
-  const token = localStorage.getItem("token")?.trim();
+  const [reloadFlag, setReloadFlag] = useState(0);
+
+  const triggerReload = () => setReloadFlag((prev) => prev + 1);
 
   const {
     data: projects,
     loading: loadingProjects,
     error: errorProjects,
     refetch: refetchProjects,
-  } = useFetch(token ? `${import.meta.env.VITE_BASE_API_URL}/projects` : null);
+  } = useFetch(
+    localStorage.getItem("token")
+      ? `${import.meta.env.VITE_BASE_API_URL}/projects`
+      : null,
+    reloadFlag
+  );
 
   const {
     data: tasks,
     loading: loadingTasks,
     error: errorTasks,
     refetch: refetchTask,
-  } = useFetch(token ? `${import.meta.env.VITE_BASE_API_URL}/tasks` : null);
+  } = useFetch(
+    localStorage.getItem("token")
+      ? `${import.meta.env.VITE_BASE_API_URL}/tasks`
+      : null,
+    reloadFlag
+  );
 
   const handleDeleteTask = async (taskId) => {
+    const token = localStorage.getItem("token");
+
     if (!token) {
       toast.error("No authentication token found.");
       return;
@@ -71,6 +85,7 @@ export function TaskManageProvider({ children }) {
           loadingTasks,
           errorTasks,
           refetchTask,
+          triggerReload,
         }}
       >
         {children}

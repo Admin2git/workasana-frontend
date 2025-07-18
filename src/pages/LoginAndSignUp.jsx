@@ -13,7 +13,7 @@ export const LoginAndSignUp = () => {
     password: "",
   });
 
-  const { refetchProjects, refetchTask } = UseTaskContext();
+  const { triggerReload } = UseTaskContext();
   const handleTabChange = (tab) => setActiveTab(tab);
   const navigate = useNavigate();
 
@@ -44,8 +44,7 @@ export const LoginAndSignUp = () => {
       console.log(res);
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
-      refetchProjects?.();
-      refetchTask?.();
+      triggerReload();
       navigate("/dashboard");
     } catch (err) {
       toast.error("Login failed");
