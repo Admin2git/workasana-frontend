@@ -6,6 +6,12 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
+    if (!url) {
+      setData(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
     setLoading(true);
     setError(null);
     const token = localStorage.getItem("token");
