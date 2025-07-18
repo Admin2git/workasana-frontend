@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import UseTaskContext from "../contexts/TaskManageContext";
 
 export const LoginAndSignUp = () => {
   const [activeTab, setActiveTab] = useState("login");
@@ -11,6 +12,8 @@ export const LoginAndSignUp = () => {
     email: "",
     password: "",
   });
+
+  const { refetchProjects, refetchTask } = UseTaskContext();
   const handleTabChange = (tab) => setActiveTab(tab);
   const navigate = useNavigate();
 
@@ -41,6 +44,8 @@ export const LoginAndSignUp = () => {
       console.log(res);
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
+      refetchProjects?.();
+      refetchTask?.();
       navigate("/dashboard");
     } catch (err) {
       toast.error("Login failed");

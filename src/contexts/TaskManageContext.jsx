@@ -9,23 +9,23 @@ const UseTaskContext = () => useContext(taskContext);
 export default UseTaskContext;
 
 export function TaskManageProvider({ children }) {
+  const token = localStorage.getItem("token")?.trim();
+
   const {
     data: projects,
     loading: loadingProjects,
     error: errorProjects,
     refetch: refetchProjects,
-  } = useFetch(`${import.meta.env.VITE_BASE_API_URL}/projects`);
+  } = useFetch(token ? `${import.meta.env.VITE_BASE_API_URL}/projects` : null);
 
   const {
     data: tasks,
     loading: loadingTasks,
     error: errorTasks,
     refetch: refetchTask,
-  } = useFetch(`${import.meta.env.VITE_BASE_API_URL}/tasks`);
+  } = useFetch(token ? `${import.meta.env.VITE_BASE_API_URL}/tasks` : null);
 
   const handleDeleteTask = async (taskId) => {
-    const token = localStorage.getItem("token")?.trim();
-
     if (!token) {
       toast.error("No authentication token found.");
       return;
