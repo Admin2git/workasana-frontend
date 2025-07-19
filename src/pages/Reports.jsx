@@ -1,5 +1,3 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 import {
   Chart as ChartJS,
@@ -100,25 +98,13 @@ export const Reports = () => {
     ],
   };
 
-  const navigate = useNavigate();
-
   return (
     <div className="h-100  d-flex flex-column container-fluid">
-       <nav className="navbar navbar-expand-md row navbar-dark bg-secondary bg-opacity-75 sticky-top">
+      <nav className="navbar navbar-expand-md row navbar-dark bg-secondary bg-opacity-75 sticky-top">
         <div className="container d-flex justify-content-around my-2">
           <a className="navbar-brand h1 m-0" href="/dashboard">
             workasana
           </a>
-
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
 
           <button
             className="navbar-toggler"

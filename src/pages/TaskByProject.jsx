@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../useFetch";
 import { Sidebar } from "../components/Sidebar";
 import UseTaskContext from "../contexts/TaskManageContext";
@@ -20,7 +20,6 @@ export const TaskByProject = () => {
     timeToComplete: 0,
   });
 
-  const navigate = useNavigate();
   const { projects, loadingProjects, errorProjects, handleDeleteTask } =
     UseTaskContext();
 
@@ -120,16 +119,6 @@ export const TaskByProject = () => {
           <a className="navbar-brand h1 m-0" href="/dashboard">
             workasana
           </a>
-
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
 
           <button
             className="navbar-toggler"

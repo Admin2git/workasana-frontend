@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 import useFetch from "../useFetch";
 import { useEffect, useState } from "react";
@@ -31,7 +31,6 @@ export const TaskDetails = () => {
     }
   }, [task]);
 
-  const navigate = useNavigate();
 
   const handleStatus = async (newStatus) => {
     const token = localStorage.getItem("token");
@@ -75,16 +74,6 @@ export const TaskDetails = () => {
           <a className="navbar-brand h1 m-0" href="/dashboard">
             workasana
           </a>
-
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
 
           <button
             className="navbar-toggler"

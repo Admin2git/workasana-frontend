@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import { Sidebar } from "../components/Sidebar";
 import useFetch from "../useFetch";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import Select from "react-select";
@@ -53,8 +53,6 @@ export const Dashboard = () => {
       label: user.name,
     })) || [];
 
-  const navigate = useNavigate();
-
   const filteredProjects = projects?.filter((project) =>
     project.name
       .split(" ")
@@ -83,11 +81,6 @@ export const Dashboard = () => {
           .includes(searchTerm.split(" ").join("").toLowerCase())
       )
   );
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   const handleSaveProject = async (e) => {
     e.preventDefault();
@@ -215,10 +208,6 @@ export const Dashboard = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{ maxWidth: "390px" }}
           />
-
-          <button className="btn btn-danger btn-sm" onClick={handleLogout}>
-            Logout
-          </button>
 
           <button
             className="navbar-toggler"

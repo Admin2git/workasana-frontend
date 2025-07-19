@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 import useFetch from "../useFetch";
 import { useState } from "react";
@@ -9,7 +9,6 @@ export const ProjectAndItsTask = () => {
   const [showModal, setShowModal] = useState(false);
   const [projectData, setProjectData] = useState({ name: "", description: "" });
 
-  const navigate = useNavigate();
 
   const {
     data,
@@ -117,15 +116,7 @@ export const ProjectAndItsTask = () => {
             workasana
           </a>
 
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
+          
 
           <button
             className="navbar-toggler"

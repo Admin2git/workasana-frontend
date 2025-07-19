@@ -1,5 +1,4 @@
 import { Sidebar } from "../components/Sidebar";
-import { useNavigate } from "react-router-dom";
 import useFetch from "../useFetch";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -8,8 +7,6 @@ import axios from "axios";
 export const TeamsManage = () => {
   const [showTeamModal, setShowTeamModal] = useState(false);
   const [teamData, setTeamData] = useState({ name: "", description: "" });
-
-  const navigate = useNavigate();
 
   const {
     data: teams,
@@ -93,16 +90,6 @@ export const TeamsManage = () => {
           <a className="navbar-brand h1 m-0" href="/dashboard">
             workasana
           </a>
-
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
 
           <button
             className="navbar-toggler"

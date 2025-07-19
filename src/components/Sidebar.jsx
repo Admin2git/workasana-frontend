@@ -1,7 +1,13 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div
       className="offcanvas offcanvas-start col-md-4 bg-dark text-white "
@@ -65,6 +71,14 @@ export const Sidebar = () => {
             </NavLink>
           </li>
         </ul>
+        <div className="pt-5">
+          <button
+            className="btn btn-danger btn-sm w-100"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );
