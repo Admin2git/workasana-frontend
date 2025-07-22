@@ -26,6 +26,8 @@ This is the **frontend application** for the Workasana project — a task & proj
 - 🎨 Bootstrap
 - 📝 Axios
 - 🔍 Chart.js
+- usestate
+- context Hook
 
 ---
 
